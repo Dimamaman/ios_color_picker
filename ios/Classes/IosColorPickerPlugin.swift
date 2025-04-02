@@ -35,7 +35,7 @@ public class IosColorPickerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
         colorPicker.selectedColor = defaultColor?.toUIColor() ?? .red
         colorPicker.modalPresentationStyle = .popover
         if darkMode {
-                UIApplication.shared.delegate?.window??.overrideUserInterfaceStyle = .dark
+                UIApplication.shared.delegate?.window??.overrideUserInterfaceStyle = .light
 
         }
 
