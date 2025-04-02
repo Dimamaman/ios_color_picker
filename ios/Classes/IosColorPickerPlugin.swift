@@ -34,15 +34,17 @@ public class IosColorPickerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
         let colorPicker = UIColorPickerViewController()
         colorPicker.selectedColor = defaultColor?.toUIColor() ?? .red
         colorPicker.modalPresentationStyle = .popover
-        if darkMode {
-                UIApplication.shared.delegate?.window??.overrideUserInterfaceStyle = .light
 
-        }
-
+        colorPicker.overrideUserInterfaceStyle = .light
         colorPicker.delegate = self
 
-        if let rootViewController = UIApplication.shared.delegate?.window??.rootViewController {
-            rootViewController.present(colorPicker, animated: true, completion: nil)
+        if let rootVC = UIApplication.shared.delegate?.window??.rootViewController {
+            var topController = rootVC
+            while let presentedVC = topController.presentedViewController {
+                topController = presentedVC
+            }
+
+            topController.present(colorPicker, animated: true, completion: nil)
         }
 
         result(nil)
